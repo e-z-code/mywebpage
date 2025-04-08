@@ -1,13 +1,13 @@
 ---
 name: "✌️ Feature Request"
 about: Template for feature request
-title: ''
+title: "✌️"
 labels: feature
 assignees: ''
 
 ---
 
-*Feature*
+**Feature**
 
 
-*Additional context*
+**Additional context**
