@@ -4,17 +4,17 @@ const words = ['goal', 'story', 'on', 'code', 'else'];
 
 function StartPage() {
 
-    const [position, setPosition] = useState(2);
+    const [center, setCenter] = useState(2);
 
     const moveUp = () => {
-        if (position > 0) {
-            setPosition((prevPosition) => (prevPosition - 1));
+        if (center > 0) {
+            setCenter((prevCenter) => (prevCenter - 1));
         }
     };
 
     const moveDown = () => {
-        if (position < words.length - 1) {
-            setPosition((prevPosition) => (prevPosition + 1));
+        if (center < words.length - 1) {
+            setCenter((prevCenter) => (prevCenter + 1));
         }
     };
 
@@ -24,17 +24,52 @@ function StartPage() {
         <div className="h-screen w-screen flex items-center justify-center bg-white relative overflow-hidden">
             
             {/* Prefix */}
-            <div className="absolute left-1/2 -translate-x-[150px] text-5xl font-bold">
+            <div className="absolute left-1/2 -translate-x-[150px] text-5xl font-bold font-mono">
                 ez_
             </div>
 
             {/* Word Slider */}
+            <div className="absolute h-screen w-[200px] translate-x-[50px] flex flex-col justify-center bg-white-100">
+                {words.map((word, i) => {
+                    const distFromCenter = i - center;
+                    let style = "absolute flex ps-3 items-center w-[200px] h-[150px] font-bold transition-all duration-300 font-mono";
+                    if (distFromCenter === 0) {
+                        style += " text-white bg-[#3c0241] text-5xl";
+                    } else if (Math.abs(distFromCenter) === 1) {
+                        style += " text-[#3c0421] text-3xl opacity-70";
+                    } else {
+                        style += " text-[#3c0421] text-2xl opacity-30";
+                    }
+
+                    return (
+                        <div
+                            key={i} className={style} style={{
+                                transform: `translateY(${distFromCenter * 150}px)`,
+                            }}
+                        >
+                            {word}
+                        </div>
+                    );
+                })}
+            </div>
             
             {/* Buttons */}
-
+            <div className="absolute right-1/2 translate-x-[225px] flex flex-col bg-white items-center gap-2">
+                <button onClick={moveUp} className="w-8 h-8 rounded-full bg-[#3c0241] text-white text-sm">
+                    ▲
+                </button>
+                <button className="bg-[#3c0241] text-white text-sm px-2 py-1 font-bold font-mono">
+                    ENTER
+                </button>
+                <button onClick={moveDown} className="w-8 h-8 rounded-full bg-[#3c0241] text-white text-sm">
+                    ▼
+                </button>
+            </div>
+        
         </div>
 
     );
+
 }
 
 export default StartPage;
