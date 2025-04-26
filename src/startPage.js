@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const words = ['goal', 'story', 'on', 'code', 'else'];
 
 function StartPage() {
 
-    /* State : Which index is at the center */
+    /* State Hook : Which index is at the center */
     const [center, setCenter] = useState(2);
     const navigate = useNavigate();
 
-    /* Functions for Arrow Buttons */ 
+    /* Functions for Buttons */ 
     const moveUp = () => {
         if (center > 0) {
             setCenter((prevCenter) => (prevCenter - 1));
@@ -20,13 +20,32 @@ function StartPage() {
             setCenter((prevCenter) => (prevCenter + 1));
         }
     };
-
-    /* Functions for Enter Button */
     const toIndividualPage = () => {
         const target_loc = `${words[center]}`;
         navigate(target_loc);
     };
 
+    /* Effect Hook for Keys */
+    useEffect(() => {
+
+        const onKey = (e) => {
+            if (e.key === 'ArrowUp') {
+                moveUp();
+            }
+            if (e.key === 'ArrowDown') {
+                moveDown();
+            }
+            if (e.key === 'Enter') {
+                toIndividualPage();
+            }
+        };
+
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+
+    }, [center]);
+
+    /* Rendering */ 
     return (
         
         <div className="h-screen w-screen flex items-center justify-center bg-white relative overflow-hidden">
