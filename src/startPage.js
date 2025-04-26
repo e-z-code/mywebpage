@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const words = ['goal', 'story', 'on', 'code', 'else'];
 
 function StartPage() {
 
+    /* State : Which index is at the center */
     const [center, setCenter] = useState(2);
+    const navigate = useNavigate();
 
+    /* Functions for Arrow Buttons */ 
     const moveUp = () => {
         if (center > 0) {
             setCenter((prevCenter) => (prevCenter - 1));
         }
     };
-
     const moveDown = () => {
         if (center < words.length - 1) {
             setCenter((prevCenter) => (prevCenter + 1));
         }
     };
 
+    /* Functions for Enter Button */
+    const toIndividualPage = () => {
+        const target_loc = `${words[center]}`;
+        navigate(target_loc);
+    };
 
     return (
         
@@ -58,7 +66,7 @@ function StartPage() {
                 <button onClick={moveUp} className="w-8 h-8 rounded-full bg-[#3c0241] text-white text-sm">
                     ▲
                 </button>
-                <button className="bg-[#3c0241] text-white text-sm px-2 py-1 font-bold font-mono">
+                <button onClick={toIndividualPage} className="bg-[#3c0241] text-white text-sm px-2 py-1 font-bold font-mono">
                     ENTER
                 </button>
                 <button onClick={moveDown} className="w-8 h-8 rounded-full bg-[#3c0241] text-white text-sm">
