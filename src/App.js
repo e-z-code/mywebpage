@@ -2,14 +2,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import StartPage from './startPage';
+import GoalPage from './goalPage';
+import StoryPage from './storyPage';
+import OnPage from './onPage';
+import CodePage from './codePage';
+import ElsePage from './elsePage';
 
 /* Test Page */
-
-const GoalPage = () => <div>goal</div>;
-const StoryPage = () => <div>story</div>;
-const OnPage = () => <div>on</div>;
-const CodePage = () => <div>code</div>;
-const ElsePage = () => <div>else</div>;
 
 function App() {
 
